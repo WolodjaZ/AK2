@@ -8,12 +8,14 @@ STDER = 2
 EXIT_SUCCESS = 0
 BUFLEN = 512
 
+
 ERR_MSG: .ascii "Wprowadzona liczba jest niepoprawna!\n"
 ER_LEN= .- ERR_MSG
 
 .bss
 .comm textin, 512
 .comm textout, 512
+
 
 .text
 .global _start
