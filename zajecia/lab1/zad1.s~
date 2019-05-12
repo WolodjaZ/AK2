@@ -1,0 +1,41 @@
+.data
+SYSWRITE = 1
+SYSEXIT = 60
+STDOUT = 1
+EXIT_SUCCESS = 0
+FIRST = 36
+SECOND = 12
+
+.text
+.global _start
+_start:
+nop
+
+
+movq $FIRST, %rax
+movq $SECOND, %rbx
+
+euklides:
+movq $0, %rdx
+cmp %rax, %rbx
+jne dzielenie
+jmp koniec
+dzielenie:
+div %rbx
+movq %rbx, %rax
+movq %rdx, %rbx
+cmp $0, %rbx
+jne euklides
+movq %rax, %rbx
+jmp koniec
+koniec:
+
+movq $SYSWRITE, %rax
+movq $STDOUT, %rdi
+movq %rbx, %rsi
+syscall
+
+movq $SYSEXIT, %rax
+movq $EXIT_SUCCESS, %rdi
+syscall
+
